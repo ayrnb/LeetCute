@@ -14,6 +14,11 @@
 *.ilk
 *.exp
 *.manifest
+*.cmake
+CMakeCache.txt
+
+# 忽略所有 CMakeFiles 文件夹
+**/CMakeFiles/
 
 # CUDA 特定文件
 *.cubin
@@ -33,8 +38,6 @@
 *.cudafe2.stub.gpu
 
 # CMake 生成的文件
-CMakeFiles/
-CMakeCache.txt
 cmake_install.cmake
 install_manifest.txt
 compile_commands.json
