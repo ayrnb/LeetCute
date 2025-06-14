@@ -1,0 +1,5 @@
+/data/LeetCute/CMakeFiles/edit_cache.dir
+/data/LeetCute/CMakeFiles/rebuild_cache.dir
+/data/LeetCute/reduce/CMakeFiles/my_reduce.dir
+/data/LeetCute/reduce/CMakeFiles/edit_cache.dir
+/data/LeetCute/reduce/CMakeFiles/rebuild_cache.dir
