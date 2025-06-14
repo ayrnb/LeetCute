@@ -1,8 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"/data/LeetCute/cmake_install.cmake",
-		"/data/LeetCute/reduce/cmake_install.cmake"
-	],
-	"Parallel" : false
-}
