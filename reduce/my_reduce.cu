@@ -59,6 +59,7 @@ int main(){
     reduce_baseline<<<block_num,THREADS_PER_BLOCK>>>(d_input,d_output,N);
     cudaEventRecord(stop,0);
     cudaEventSynchronize(stop);
+    
     float time;
     cudaEventElapsedTime(&time,start,stop);
     cudaMemcpy(output,d_output,block_num*sizeof(float),cudaMemcpyDeviceToHost);

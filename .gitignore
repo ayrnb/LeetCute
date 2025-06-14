@@ -1,0 +1,95 @@
+# 编译生成的文件
+*.o
+*.obj
+*.exe
+*.out
+*.app
+*.so
+*.dylib
+*.dll
+*.lib
+*.a
+*.d
+*.pdb
+*.ilk
+*.exp
+*.manifest
+
+# CUDA 特定文件
+*.cubin
+*.ptx
+*.fatbin
+*.cudafe1.c
+*.cudafe2.c
+*.cudafe1.cpp
+*.cudafe2.cpp
+*.cudafe1.gpu
+*.cudafe2.gpu
+*.cudafe1.stub.c
+*.cudafe2.stub.c
+*.cudafe1.stub.cpp
+*.cudafe2.stub.cpp
+*.cudafe1.stub.gpu
+*.cudafe2.stub.gpu
+
+# CMake 生成的文件
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps
+build/
+out/
+bin/
+lib/
+
+# IDE 相关文件
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# 调试文件
+*.log
+*.tlog
+*.lastbuildstate
+*.idb
+*.opendb
+*.opensdf
+*.sdf
+*.cachefile
+*.VC.db
+*.VC.VC.opendb
+
+# 临时文件
+*.tmp
+*.temp
+*.bak
+*.backup
+*.orig
+*.rej
+*.patch
+
+# 性能分析文件
+*.prof
+*.nsys-rep
+*.nsys-rep.tar.gz
+*.qdrep
+*.qdrep.tar.gz
+
+# 文档生成文件
+docs/_build/
+docs/_static/
+docs/_templates/
+
+# 测试文件 - 保留
+!tests/
+!*_test.cu
+!*_test.cpp
+!*_test.c
+!*_test.h
+!*_test.hpp
