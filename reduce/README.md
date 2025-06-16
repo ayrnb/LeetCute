@@ -2,9 +2,27 @@
 
 ### 规约操作
 #### 规约算法示意图
-![规约算法示意图](../figure/reduce.png)
+<div class="image-center">
+    <img src="../figure/reduce.png" alt="规约算法示意图" class="reduce-image">
+</div>
+
+<style>
+.reduce-image {
+    width: 400px; /* 设置图片宽度 */
+    height: auto; /* 高度自动调整，保持比例 */
+}
+.image-center {
+    text-align: center; /* 使内容居中 */
+}
+.warp_image {
+    width: 400px; /* 设置图片宽度 */
+    height: auto; /* 高度自动调整，保持比例 */
+}
+</style>
 #### warp优化示意图
-![warp优化示意图](../figure/warp_divergence.png)
+<div class="image-center">
+    <img src="../figure/warp_divergence.png" alt="warp优化示意图" width="500" height="300" class="warp_image">
+</div>
 规约（Reduction）是一种将数组中的多个元素合并为单个值的操作。在这个实现中，我们计算数组中所有元素的和。
 
 ### 实现方式
