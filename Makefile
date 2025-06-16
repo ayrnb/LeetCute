@@ -142,6 +142,19 @@ my_reduce_share_memory/fast:
 	$(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_share_memory.dir/build.make reduce/CMakeFiles/my_reduce_share_memory.dir/build
 .PHONY : my_reduce_share_memory/fast
 
+#=============================================================================
+# Target rules for targets named my_reduce_warp_divergence
+
+# Build rule for target.
+my_reduce_warp_divergence: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 my_reduce_warp_divergence
+.PHONY : my_reduce_warp_divergence
+
+# fast build rule for target.
+my_reduce_warp_divergence/fast:
+	$(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_warp_divergence.dir/build.make reduce/CMakeFiles/my_reduce_warp_divergence.dir/build
+.PHONY : my_reduce_warp_divergence/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -152,6 +165,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... my_reduce_baseline"
 	@echo "... my_reduce_share_memory"
+	@echo "... my_reduce_warp_divergence"
 .PHONY : help
 
 

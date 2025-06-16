@@ -144,6 +144,20 @@ my_reduce_share_memory/fast:
 	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_share_memory.dir/build.make reduce/CMakeFiles/my_reduce_share_memory.dir/build
 .PHONY : my_reduce_share_memory/fast
 
+# Convenience name for target.
+reduce/CMakeFiles/my_reduce_warp_divergence.dir/rule:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 reduce/CMakeFiles/my_reduce_warp_divergence.dir/rule
+.PHONY : reduce/CMakeFiles/my_reduce_warp_divergence.dir/rule
+
+# Convenience name for target.
+my_reduce_warp_divergence: reduce/CMakeFiles/my_reduce_warp_divergence.dir/rule
+.PHONY : my_reduce_warp_divergence
+
+# fast build rule for target.
+my_reduce_warp_divergence/fast:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_warp_divergence.dir/build.make reduce/CMakeFiles/my_reduce_warp_divergence.dir/build
+.PHONY : my_reduce_warp_divergence/fast
+
 my_reduce_baseline.o: my_reduce_baseline.cu.o
 .PHONY : my_reduce_baseline.o
 
@@ -192,6 +206,30 @@ my_reduce_share_memory.cu.s:
 	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_share_memory.dir/build.make reduce/CMakeFiles/my_reduce_share_memory.dir/my_reduce_share_memory.cu.s
 .PHONY : my_reduce_share_memory.cu.s
 
+my_reduce_warp_divergence.o: my_reduce_warp_divergence.cu.o
+.PHONY : my_reduce_warp_divergence.o
+
+# target to build an object file
+my_reduce_warp_divergence.cu.o:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_warp_divergence.dir/build.make reduce/CMakeFiles/my_reduce_warp_divergence.dir/my_reduce_warp_divergence.cu.o
+.PHONY : my_reduce_warp_divergence.cu.o
+
+my_reduce_warp_divergence.i: my_reduce_warp_divergence.cu.i
+.PHONY : my_reduce_warp_divergence.i
+
+# target to preprocess a source file
+my_reduce_warp_divergence.cu.i:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_warp_divergence.dir/build.make reduce/CMakeFiles/my_reduce_warp_divergence.dir/my_reduce_warp_divergence.cu.i
+.PHONY : my_reduce_warp_divergence.cu.i
+
+my_reduce_warp_divergence.s: my_reduce_warp_divergence.cu.s
+.PHONY : my_reduce_warp_divergence.s
+
+# target to generate assembly for a file
+my_reduce_warp_divergence.cu.s:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_warp_divergence.dir/build.make reduce/CMakeFiles/my_reduce_warp_divergence.dir/my_reduce_warp_divergence.cu.s
+.PHONY : my_reduce_warp_divergence.cu.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -202,12 +240,16 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... my_reduce_baseline"
 	@echo "... my_reduce_share_memory"
+	@echo "... my_reduce_warp_divergence"
 	@echo "... my_reduce_baseline.o"
 	@echo "... my_reduce_baseline.i"
 	@echo "... my_reduce_baseline.s"
 	@echo "... my_reduce_share_memory.o"
 	@echo "... my_reduce_share_memory.i"
 	@echo "... my_reduce_share_memory.s"
+	@echo "... my_reduce_warp_divergence.o"
+	@echo "... my_reduce_warp_divergence.i"
+	@echo "... my_reduce_warp_divergence.s"
 .PHONY : help
 
 
