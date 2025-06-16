@@ -8,14 +8,14 @@
 
 <style>
 .reduce-image {
-    width: 400px; /* 设置图片宽度 */
+    width: 200px; /* 设置图片宽度 */
     height: auto; /* 高度自动调整，保持比例 */
 }
 .image-center {
     text-align: center; /* 使内容居中 */
 }
 .warp_image {
-    width: 400px; /* 设置图片宽度 */
+    width: 200px; /* 设置图片宽度 */
     height: auto; /* 高度自动调整，保持比例 */
 }
 </style>
