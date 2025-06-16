@@ -117,42 +117,80 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-reduce/CMakeFiles/my_reduce.dir/rule:
-	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 reduce/CMakeFiles/my_reduce.dir/rule
-.PHONY : reduce/CMakeFiles/my_reduce.dir/rule
+reduce/CMakeFiles/my_reduce_baseline.dir/rule:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 reduce/CMakeFiles/my_reduce_baseline.dir/rule
+.PHONY : reduce/CMakeFiles/my_reduce_baseline.dir/rule
 
 # Convenience name for target.
-my_reduce: reduce/CMakeFiles/my_reduce.dir/rule
-.PHONY : my_reduce
+my_reduce_baseline: reduce/CMakeFiles/my_reduce_baseline.dir/rule
+.PHONY : my_reduce_baseline
 
 # fast build rule for target.
-my_reduce/fast:
-	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce.dir/build.make reduce/CMakeFiles/my_reduce.dir/build
-.PHONY : my_reduce/fast
+my_reduce_baseline/fast:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_baseline.dir/build.make reduce/CMakeFiles/my_reduce_baseline.dir/build
+.PHONY : my_reduce_baseline/fast
 
-my_reduce.o: my_reduce.cu.o
-.PHONY : my_reduce.o
+# Convenience name for target.
+reduce/CMakeFiles/my_reduce_share_memory.dir/rule:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 reduce/CMakeFiles/my_reduce_share_memory.dir/rule
+.PHONY : reduce/CMakeFiles/my_reduce_share_memory.dir/rule
+
+# Convenience name for target.
+my_reduce_share_memory: reduce/CMakeFiles/my_reduce_share_memory.dir/rule
+.PHONY : my_reduce_share_memory
+
+# fast build rule for target.
+my_reduce_share_memory/fast:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_share_memory.dir/build.make reduce/CMakeFiles/my_reduce_share_memory.dir/build
+.PHONY : my_reduce_share_memory/fast
+
+my_reduce_baseline.o: my_reduce_baseline.cu.o
+.PHONY : my_reduce_baseline.o
 
 # target to build an object file
-my_reduce.cu.o:
-	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce.dir/build.make reduce/CMakeFiles/my_reduce.dir/my_reduce.cu.o
-.PHONY : my_reduce.cu.o
+my_reduce_baseline.cu.o:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_baseline.dir/build.make reduce/CMakeFiles/my_reduce_baseline.dir/my_reduce_baseline.cu.o
+.PHONY : my_reduce_baseline.cu.o
 
-my_reduce.i: my_reduce.cu.i
-.PHONY : my_reduce.i
+my_reduce_baseline.i: my_reduce_baseline.cu.i
+.PHONY : my_reduce_baseline.i
 
 # target to preprocess a source file
-my_reduce.cu.i:
-	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce.dir/build.make reduce/CMakeFiles/my_reduce.dir/my_reduce.cu.i
-.PHONY : my_reduce.cu.i
+my_reduce_baseline.cu.i:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_baseline.dir/build.make reduce/CMakeFiles/my_reduce_baseline.dir/my_reduce_baseline.cu.i
+.PHONY : my_reduce_baseline.cu.i
 
-my_reduce.s: my_reduce.cu.s
-.PHONY : my_reduce.s
+my_reduce_baseline.s: my_reduce_baseline.cu.s
+.PHONY : my_reduce_baseline.s
 
 # target to generate assembly for a file
-my_reduce.cu.s:
-	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce.dir/build.make reduce/CMakeFiles/my_reduce.dir/my_reduce.cu.s
-.PHONY : my_reduce.cu.s
+my_reduce_baseline.cu.s:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_baseline.dir/build.make reduce/CMakeFiles/my_reduce_baseline.dir/my_reduce_baseline.cu.s
+.PHONY : my_reduce_baseline.cu.s
+
+my_reduce_share_memory.o: my_reduce_share_memory.cu.o
+.PHONY : my_reduce_share_memory.o
+
+# target to build an object file
+my_reduce_share_memory.cu.o:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_share_memory.dir/build.make reduce/CMakeFiles/my_reduce_share_memory.dir/my_reduce_share_memory.cu.o
+.PHONY : my_reduce_share_memory.cu.o
+
+my_reduce_share_memory.i: my_reduce_share_memory.cu.i
+.PHONY : my_reduce_share_memory.i
+
+# target to preprocess a source file
+my_reduce_share_memory.cu.i:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_share_memory.dir/build.make reduce/CMakeFiles/my_reduce_share_memory.dir/my_reduce_share_memory.cu.i
+.PHONY : my_reduce_share_memory.cu.i
+
+my_reduce_share_memory.s: my_reduce_share_memory.cu.s
+.PHONY : my_reduce_share_memory.s
+
+# target to generate assembly for a file
+my_reduce_share_memory.cu.s:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_share_memory.dir/build.make reduce/CMakeFiles/my_reduce_share_memory.dir/my_reduce_share_memory.cu.s
+.PHONY : my_reduce_share_memory.cu.s
 
 # Help Target
 help:
@@ -162,10 +200,14 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... my_reduce"
-	@echo "... my_reduce.o"
-	@echo "... my_reduce.i"
-	@echo "... my_reduce.s"
+	@echo "... my_reduce_baseline"
+	@echo "... my_reduce_share_memory"
+	@echo "... my_reduce_baseline.o"
+	@echo "... my_reduce_baseline.i"
+	@echo "... my_reduce_baseline.s"
+	@echo "... my_reduce_share_memory.o"
+	@echo "... my_reduce_share_memory.i"
+	@echo "... my_reduce_share_memory.s"
 .PHONY : help
 
 

@@ -1,20 +1,26 @@
 #include <stdio.h>
 #include <cuda.h>
 #include <cuda_runtime.h>
-#define THREADS_PER_BLOCK 128
+#define THREADS_PER_BLOCK 256
 
-__global__ void reduce_baseline(float *input,float *output,int N){
-    float* index_block= input+blockIdx.x*blockDim.x;
+
+__global__ void reduce_shared(float *input,float *output,int N){
+    __shared__ float shared[THREADS_PER_BLOCK];
+    float* input_begin=input+blockIdx.x*blockDim.x;
+    
+    // Load input into shared memory
+    shared[threadIdx.x] = input_begin[threadIdx.x];
+    __syncthreads();
     for(int i=1;i<blockDim.x;i*=2){
         if(threadIdx.x%(i*2)==0){
-            index_block[threadIdx.x]+=index_block[threadIdx.x+i];   
+            shared[threadIdx.x]+=shared[threadIdx.x+i];
         }
         __syncthreads();
     }
-    if(threadIdx.x==0) output[blockIdx.x]=index_block[0];
-
+    
+    // Write result for this block to global memory
+    if(threadIdx.x==0)output[blockIdx.x]=shared[0];
 }
-
 
 bool check(float *out,float *res,int n){
     for(int i=0;i<n;i++){
@@ -36,7 +42,7 @@ int main(){
     cudaMalloc((void **)&d_output,block_num*sizeof(float));
     float *resutl=(float*)malloc(block_num*sizeof(float));
     for(int i=0;i<N;i++){
-        input[i]=2.0*(float)drand48()-1.0;
+        input[i]=1;
     }
     //cpu 计算
     time_t start_time=clock();
@@ -56,7 +62,7 @@ int main(){
     cudaEventCreate(&start);
     cudaEventCreate(&stop);
     cudaEventRecord(start,0);
-    reduce_baseline<<<block_num,THREADS_PER_BLOCK>>>(d_input,d_output,N);
+    reduce_shared<<<block_num,THREADS_PER_BLOCK>>>(d_input,d_output,N);
     cudaEventRecord(stop,0);
     cudaEventSynchronize(stop);
     
@@ -71,7 +77,8 @@ int main(){
         for(int i=0;i<block_num;i++){
             printf("gpu result: %f\n",output[i]);
         }
-    };
+    }
+
     cudaFree(d_input);
     cudaFree(d_output);
 

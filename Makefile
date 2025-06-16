@@ -117,17 +117,30 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named my_reduce
+# Target rules for targets named my_reduce_baseline
 
 # Build rule for target.
-my_reduce: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 my_reduce
-.PHONY : my_reduce
+my_reduce_baseline: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 my_reduce_baseline
+.PHONY : my_reduce_baseline
 
 # fast build rule for target.
-my_reduce/fast:
-	$(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce.dir/build.make reduce/CMakeFiles/my_reduce.dir/build
-.PHONY : my_reduce/fast
+my_reduce_baseline/fast:
+	$(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_baseline.dir/build.make reduce/CMakeFiles/my_reduce_baseline.dir/build
+.PHONY : my_reduce_baseline/fast
+
+#=============================================================================
+# Target rules for targets named my_reduce_share_memory
+
+# Build rule for target.
+my_reduce_share_memory: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 my_reduce_share_memory
+.PHONY : my_reduce_share_memory
+
+# fast build rule for target.
+my_reduce_share_memory/fast:
+	$(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_share_memory.dir/build.make reduce/CMakeFiles/my_reduce_share_memory.dir/build
+.PHONY : my_reduce_share_memory/fast
 
 # Help Target
 help:
@@ -137,7 +150,8 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... my_reduce"
+	@echo "... my_reduce_baseline"
+	@echo "... my_reduce_share_memory"
 .PHONY : help
 
 
