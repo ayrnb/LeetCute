@@ -47,6 +47,24 @@ nvcc my_reduce.cu -o my_reduce
 2. 使用线程束（Warp）级别的优化
 3. 通过调整 `THREADS_PER_BLOCK` 大小来优化性能
 
+### bank conflict
+
+![bank conflict](../figure/conflict.png)
+#### 什么是 bank conflict？
+NVIDIA GPU 的共享内存被划分为多个 banks（通常是32个）。每个 bank 可以在一个周期内服务一个读或写请求。如果多个线程同时访问不同的 bank，这些访问可以并行处理；但如果多个线程尝试在同一周期内访问同一个 bank 的不同地址，则会发生 bank conflict，导致这些访问必须串行执行，从而降低性能。
+✅ Warp 内部 vs 不同 Warp 之间的访问
+1. Warp 内部的访问
+- 在一个 warp 内部（即包含 32 个线程的一个组），如果多个线程尝试访问同一个 bank 的不同地址，就会发生 bank conflict。
+- 示例：
+  - 线程 0 访问 s_data[0] → bank 0
+  - 线程 16 访问 s_data[16] → bank 0
+- 这两个访问落在同一个 bank 上，因此会发生冲突。
+2. 不同 Warp 之间的访问
+- 不同 warp 之间的线程访问共享内存时，默认情况下不会产生 bank conflict，即使它们访问相同的 bank。这是因为：
+- 硬件设计：GPU 的共享内存系统是为 warp 级别的并行性设计的。每个 warp 是独立调度和执行的，这意味着来自不同 warp 的访问可以并行处理，而不会相互干扰。 
+- 时间间隔：由于不同 warp 的执行是交错进行的（interleaved execution），即使它们访问相同的 bank，通常也不会在同一时刻进行访问。因此，硬件能够有效地调度这些访问，避免冲突。
+- 具体机制：虽然不同 warp 的线程可以同时访问同一个 bank，但因为它们属于不同的 warp，所以这些访问会被视为独立的操作，并且可以在不同的周期中完成，从而避免了冲突。
+
 ## 注意事项
 
 1. 确保 GPU 有足够的显存
@@ -54,6 +72,7 @@ nvcc my_reduce.cu -o my_reduce
 3. 检查 CUDA 错误处理
 
 ## 未来改进
+
 
 1. 实现多级规约
 2. 添加更多规约操作（如最大值、最小值等）

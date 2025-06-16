@@ -19,3 +19,10 @@ target_link_libraries(my_reduce_warp_divergence PRIVATE CUDA::cudart )
 if(CMAKE_BUILD_TYPE STREQUAL "DEBUG")
     target_compile_options(my_reduce_warp_divergence PRIVATE $<$<COMPILE_LANGUAGE:CUDA>:-g>)
 endif()
+
+add_executable(my_reduce_no_warp_conflict my_reduce_no_warp_conflict.cu)
+
+target_link_libraries(my_reduce_no_warp_conflict PRIVATE CUDA::cudart )
+if(CMAKE_BUILD_TYPE STREQUAL "DEBUG")
+    target_compile_options(my_reduce_no_warp_conflict PRIVATE $<$<COMPILE_LANGUAGE:CUDA>:-g>)
+endif()

@@ -158,6 +158,20 @@ my_reduce_warp_divergence/fast:
 	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_warp_divergence.dir/build.make reduce/CMakeFiles/my_reduce_warp_divergence.dir/build
 .PHONY : my_reduce_warp_divergence/fast
 
+# Convenience name for target.
+reduce/CMakeFiles/my_reduce_no_warp_conflict.dir/rule:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 reduce/CMakeFiles/my_reduce_no_warp_conflict.dir/rule
+.PHONY : reduce/CMakeFiles/my_reduce_no_warp_conflict.dir/rule
+
+# Convenience name for target.
+my_reduce_no_warp_conflict: reduce/CMakeFiles/my_reduce_no_warp_conflict.dir/rule
+.PHONY : my_reduce_no_warp_conflict
+
+# fast build rule for target.
+my_reduce_no_warp_conflict/fast:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_no_warp_conflict.dir/build.make reduce/CMakeFiles/my_reduce_no_warp_conflict.dir/build
+.PHONY : my_reduce_no_warp_conflict/fast
+
 my_reduce_baseline.o: my_reduce_baseline.cu.o
 .PHONY : my_reduce_baseline.o
 
@@ -181,6 +195,30 @@ my_reduce_baseline.s: my_reduce_baseline.cu.s
 my_reduce_baseline.cu.s:
 	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_baseline.dir/build.make reduce/CMakeFiles/my_reduce_baseline.dir/my_reduce_baseline.cu.s
 .PHONY : my_reduce_baseline.cu.s
+
+my_reduce_no_warp_conflict.o: my_reduce_no_warp_conflict.cu.o
+.PHONY : my_reduce_no_warp_conflict.o
+
+# target to build an object file
+my_reduce_no_warp_conflict.cu.o:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_no_warp_conflict.dir/build.make reduce/CMakeFiles/my_reduce_no_warp_conflict.dir/my_reduce_no_warp_conflict.cu.o
+.PHONY : my_reduce_no_warp_conflict.cu.o
+
+my_reduce_no_warp_conflict.i: my_reduce_no_warp_conflict.cu.i
+.PHONY : my_reduce_no_warp_conflict.i
+
+# target to preprocess a source file
+my_reduce_no_warp_conflict.cu.i:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_no_warp_conflict.dir/build.make reduce/CMakeFiles/my_reduce_no_warp_conflict.dir/my_reduce_no_warp_conflict.cu.i
+.PHONY : my_reduce_no_warp_conflict.cu.i
+
+my_reduce_no_warp_conflict.s: my_reduce_no_warp_conflict.cu.s
+.PHONY : my_reduce_no_warp_conflict.s
+
+# target to generate assembly for a file
+my_reduce_no_warp_conflict.cu.s:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_no_warp_conflict.dir/build.make reduce/CMakeFiles/my_reduce_no_warp_conflict.dir/my_reduce_no_warp_conflict.cu.s
+.PHONY : my_reduce_no_warp_conflict.cu.s
 
 my_reduce_share_memory.o: my_reduce_share_memory.cu.o
 .PHONY : my_reduce_share_memory.o
@@ -239,11 +277,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... my_reduce_baseline"
+	@echo "... my_reduce_no_warp_conflict"
 	@echo "... my_reduce_share_memory"
 	@echo "... my_reduce_warp_divergence"
 	@echo "... my_reduce_baseline.o"
 	@echo "... my_reduce_baseline.i"
 	@echo "... my_reduce_baseline.s"
+	@echo "... my_reduce_no_warp_conflict.o"
+	@echo "... my_reduce_no_warp_conflict.i"
+	@echo "... my_reduce_no_warp_conflict.s"
 	@echo "... my_reduce_share_memory.o"
 	@echo "... my_reduce_share_memory.i"
 	@echo "... my_reduce_share_memory.s"
