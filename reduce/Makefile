@@ -172,6 +172,20 @@ my_reduce_no_warp_conflict/fast:
 	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_no_warp_conflict.dir/build.make reduce/CMakeFiles/my_reduce_no_warp_conflict.dir/build
 .PHONY : my_reduce_no_warp_conflict/fast
 
+# Convenience name for target.
+reduce/CMakeFiles/my_reduce_use_idle_thread.dir/rule:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 reduce/CMakeFiles/my_reduce_use_idle_thread.dir/rule
+.PHONY : reduce/CMakeFiles/my_reduce_use_idle_thread.dir/rule
+
+# Convenience name for target.
+my_reduce_use_idle_thread: reduce/CMakeFiles/my_reduce_use_idle_thread.dir/rule
+.PHONY : my_reduce_use_idle_thread
+
+# fast build rule for target.
+my_reduce_use_idle_thread/fast:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_use_idle_thread.dir/build.make reduce/CMakeFiles/my_reduce_use_idle_thread.dir/build
+.PHONY : my_reduce_use_idle_thread/fast
+
 my_reduce_baseline.o: my_reduce_baseline.cu.o
 .PHONY : my_reduce_baseline.o
 
@@ -244,6 +258,30 @@ my_reduce_share_memory.cu.s:
 	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_share_memory.dir/build.make reduce/CMakeFiles/my_reduce_share_memory.dir/my_reduce_share_memory.cu.s
 .PHONY : my_reduce_share_memory.cu.s
 
+my_reduce_use_idle_thread.o: my_reduce_use_idle_thread.cu.o
+.PHONY : my_reduce_use_idle_thread.o
+
+# target to build an object file
+my_reduce_use_idle_thread.cu.o:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_use_idle_thread.dir/build.make reduce/CMakeFiles/my_reduce_use_idle_thread.dir/my_reduce_use_idle_thread.cu.o
+.PHONY : my_reduce_use_idle_thread.cu.o
+
+my_reduce_use_idle_thread.i: my_reduce_use_idle_thread.cu.i
+.PHONY : my_reduce_use_idle_thread.i
+
+# target to preprocess a source file
+my_reduce_use_idle_thread.cu.i:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_use_idle_thread.dir/build.make reduce/CMakeFiles/my_reduce_use_idle_thread.dir/my_reduce_use_idle_thread.cu.i
+.PHONY : my_reduce_use_idle_thread.cu.i
+
+my_reduce_use_idle_thread.s: my_reduce_use_idle_thread.cu.s
+.PHONY : my_reduce_use_idle_thread.s
+
+# target to generate assembly for a file
+my_reduce_use_idle_thread.cu.s:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_use_idle_thread.dir/build.make reduce/CMakeFiles/my_reduce_use_idle_thread.dir/my_reduce_use_idle_thread.cu.s
+.PHONY : my_reduce_use_idle_thread.cu.s
+
 my_reduce_warp_divergence.o: my_reduce_warp_divergence.cu.o
 .PHONY : my_reduce_warp_divergence.o
 
@@ -279,6 +317,7 @@ help:
 	@echo "... my_reduce_baseline"
 	@echo "... my_reduce_no_warp_conflict"
 	@echo "... my_reduce_share_memory"
+	@echo "... my_reduce_use_idle_thread"
 	@echo "... my_reduce_warp_divergence"
 	@echo "... my_reduce_baseline.o"
 	@echo "... my_reduce_baseline.i"
@@ -289,6 +328,9 @@ help:
 	@echo "... my_reduce_share_memory.o"
 	@echo "... my_reduce_share_memory.i"
 	@echo "... my_reduce_share_memory.s"
+	@echo "... my_reduce_use_idle_thread.o"
+	@echo "... my_reduce_use_idle_thread.i"
+	@echo "... my_reduce_use_idle_thread.s"
 	@echo "... my_reduce_warp_divergence.o"
 	@echo "... my_reduce_warp_divergence.i"
 	@echo "... my_reduce_warp_divergence.s"

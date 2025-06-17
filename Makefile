@@ -168,6 +168,19 @@ my_reduce_no_warp_conflict/fast:
 	$(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_no_warp_conflict.dir/build.make reduce/CMakeFiles/my_reduce_no_warp_conflict.dir/build
 .PHONY : my_reduce_no_warp_conflict/fast
 
+#=============================================================================
+# Target rules for targets named my_reduce_use_idle_thread
+
+# Build rule for target.
+my_reduce_use_idle_thread: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 my_reduce_use_idle_thread
+.PHONY : my_reduce_use_idle_thread
+
+# fast build rule for target.
+my_reduce_use_idle_thread/fast:
+	$(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_use_idle_thread.dir/build.make reduce/CMakeFiles/my_reduce_use_idle_thread.dir/build
+.PHONY : my_reduce_use_idle_thread/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -179,6 +192,7 @@ help:
 	@echo "... my_reduce_baseline"
 	@echo "... my_reduce_no_warp_conflict"
 	@echo "... my_reduce_share_memory"
+	@echo "... my_reduce_use_idle_thread"
 	@echo "... my_reduce_warp_divergence"
 .PHONY : help
 
