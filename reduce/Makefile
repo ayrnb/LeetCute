@@ -186,6 +186,20 @@ my_reduce_use_idle_thread/fast:
 	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_use_idle_thread.dir/build.make reduce/CMakeFiles/my_reduce_use_idle_thread.dir/build
 .PHONY : my_reduce_use_idle_thread/fast
 
+# Convenience name for target.
+reduce/CMakeFiles/my_reduce_warp_shulf.dir/rule:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 reduce/CMakeFiles/my_reduce_warp_shulf.dir/rule
+.PHONY : reduce/CMakeFiles/my_reduce_warp_shulf.dir/rule
+
+# Convenience name for target.
+my_reduce_warp_shulf: reduce/CMakeFiles/my_reduce_warp_shulf.dir/rule
+.PHONY : my_reduce_warp_shulf
+
+# fast build rule for target.
+my_reduce_warp_shulf/fast:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_warp_shulf.dir/build.make reduce/CMakeFiles/my_reduce_warp_shulf.dir/build
+.PHONY : my_reduce_warp_shulf/fast
+
 my_reduce_baseline.o: my_reduce_baseline.cu.o
 .PHONY : my_reduce_baseline.o
 
@@ -306,6 +320,30 @@ my_reduce_warp_divergence.cu.s:
 	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_warp_divergence.dir/build.make reduce/CMakeFiles/my_reduce_warp_divergence.dir/my_reduce_warp_divergence.cu.s
 .PHONY : my_reduce_warp_divergence.cu.s
 
+my_reduce_warp_shulf.o: my_reduce_warp_shulf.cu.o
+.PHONY : my_reduce_warp_shulf.o
+
+# target to build an object file
+my_reduce_warp_shulf.cu.o:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_warp_shulf.dir/build.make reduce/CMakeFiles/my_reduce_warp_shulf.dir/my_reduce_warp_shulf.cu.o
+.PHONY : my_reduce_warp_shulf.cu.o
+
+my_reduce_warp_shulf.i: my_reduce_warp_shulf.cu.i
+.PHONY : my_reduce_warp_shulf.i
+
+# target to preprocess a source file
+my_reduce_warp_shulf.cu.i:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_warp_shulf.dir/build.make reduce/CMakeFiles/my_reduce_warp_shulf.dir/my_reduce_warp_shulf.cu.i
+.PHONY : my_reduce_warp_shulf.cu.i
+
+my_reduce_warp_shulf.s: my_reduce_warp_shulf.cu.s
+.PHONY : my_reduce_warp_shulf.s
+
+# target to generate assembly for a file
+my_reduce_warp_shulf.cu.s:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_warp_shulf.dir/build.make reduce/CMakeFiles/my_reduce_warp_shulf.dir/my_reduce_warp_shulf.cu.s
+.PHONY : my_reduce_warp_shulf.cu.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -319,6 +357,7 @@ help:
 	@echo "... my_reduce_share_memory"
 	@echo "... my_reduce_use_idle_thread"
 	@echo "... my_reduce_warp_divergence"
+	@echo "... my_reduce_warp_shulf"
 	@echo "... my_reduce_baseline.o"
 	@echo "... my_reduce_baseline.i"
 	@echo "... my_reduce_baseline.s"
@@ -334,6 +373,9 @@ help:
 	@echo "... my_reduce_warp_divergence.o"
 	@echo "... my_reduce_warp_divergence.i"
 	@echo "... my_reduce_warp_divergence.s"
+	@echo "... my_reduce_warp_shulf.o"
+	@echo "... my_reduce_warp_shulf.i"
+	@echo "... my_reduce_warp_shulf.s"
 .PHONY : help
 
 

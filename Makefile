@@ -181,6 +181,19 @@ my_reduce_use_idle_thread/fast:
 	$(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_use_idle_thread.dir/build.make reduce/CMakeFiles/my_reduce_use_idle_thread.dir/build
 .PHONY : my_reduce_use_idle_thread/fast
 
+#=============================================================================
+# Target rules for targets named my_reduce_warp_shulf
+
+# Build rule for target.
+my_reduce_warp_shulf: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 my_reduce_warp_shulf
+.PHONY : my_reduce_warp_shulf
+
+# fast build rule for target.
+my_reduce_warp_shulf/fast:
+	$(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_warp_shulf.dir/build.make reduce/CMakeFiles/my_reduce_warp_shulf.dir/build
+.PHONY : my_reduce_warp_shulf/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -194,6 +207,7 @@ help:
 	@echo "... my_reduce_share_memory"
 	@echo "... my_reduce_use_idle_thread"
 	@echo "... my_reduce_warp_divergence"
+	@echo "... my_reduce_warp_shulf"
 .PHONY : help
 
 
