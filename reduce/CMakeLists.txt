@@ -2,7 +2,7 @@
 find_package(CUDAToolkit REQUIRED)
 
 # 设置所有可执行文件输出目录
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin/reduce)
 
 # 添加调试选项（如果启用 Debug 构建）
 if(CMAKE_BUILD_TYPE STREQUAL "DEBUG")

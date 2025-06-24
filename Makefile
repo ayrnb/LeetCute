@@ -194,6 +194,19 @@ my_reduce_warp_shulf/fast:
 	$(MAKE) $(MAKESILENT) -f reduce/CMakeFiles/my_reduce_warp_shulf.dir/build.make reduce/CMakeFiles/my_reduce_warp_shulf.dir/build
 .PHONY : my_reduce_warp_shulf/fast
 
+#=============================================================================
+# Target rules for targets named my_gemm_baseline
+
+# Build rule for target.
+my_gemm_baseline: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 my_gemm_baseline
+.PHONY : my_gemm_baseline
+
+# fast build rule for target.
+my_gemm_baseline/fast:
+	$(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/my_gemm_baseline.dir/build.make gemm/CMakeFiles/my_gemm_baseline.dir/build
+.PHONY : my_gemm_baseline/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -202,6 +215,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... my_gemm_baseline"
 	@echo "... my_reduce_baseline"
 	@echo "... my_reduce_no_warp_conflict"
 	@echo "... my_reduce_share_memory"
