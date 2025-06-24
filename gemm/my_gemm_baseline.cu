@@ -87,7 +87,8 @@ int main(){
     time=double(end_time-start_time)/CLOCKS_PER_SEC;
     printf("v2 time: %f\n", time);
 
-   
-
+    free(A);
+    free(B);
+    free(C);
     
 }
