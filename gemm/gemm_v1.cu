@@ -1,5 +1,9 @@
 
-#include "gemm_kernel.h"
+#include <stdio.h>
+#include <sys/time.h> 
+#include <cuda.h>
+#include <cuda_runtime.h>
+#define THREAD_PER_BLOCK 1024
 
 
 template <unsigned int BLOCK_SIZE, int NUM_PER_THREAD>
@@ -16,5 +20,3 @@ __global__ void gemm_baseline_gpu(float *A,float *B,float *C,int m,int n,int k){
 
 }
 
-template __global__ void gemm_baseline_gpu<16, 16>(float*, float*, float*, int, int, int);
-template __global__ void gemm_baseline_gpu<32, 2>(float*, float*, float*, int, int, int);

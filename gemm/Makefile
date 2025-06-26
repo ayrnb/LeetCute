@@ -117,25 +117,49 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-gemm/CMakeFiles/my_gemm_baseline.dir/rule:
-	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gemm/CMakeFiles/my_gemm_baseline.dir/rule
-.PHONY : gemm/CMakeFiles/my_gemm_baseline.dir/rule
+gemm/CMakeFiles/gemm.dir/rule:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gemm/CMakeFiles/gemm.dir/rule
+.PHONY : gemm/CMakeFiles/gemm.dir/rule
 
 # Convenience name for target.
-my_gemm_baseline: gemm/CMakeFiles/my_gemm_baseline.dir/rule
-.PHONY : my_gemm_baseline
+gemm: gemm/CMakeFiles/gemm.dir/rule
+.PHONY : gemm
 
 # fast build rule for target.
-my_gemm_baseline/fast:
-	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/my_gemm_baseline.dir/build.make gemm/CMakeFiles/my_gemm_baseline.dir/build
-.PHONY : my_gemm_baseline/fast
+gemm/fast:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm.dir/build.make gemm/CMakeFiles/gemm.dir/build
+.PHONY : gemm/fast
+
+main.o: main.cu.o
+.PHONY : main.o
+
+# target to build an object file
+main.cu.o:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm.dir/build.make gemm/CMakeFiles/gemm.dir/main.cu.o
+.PHONY : main.cu.o
+
+main.i: main.cu.i
+.PHONY : main.i
+
+# target to preprocess a source file
+main.cu.i:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm.dir/build.make gemm/CMakeFiles/gemm.dir/main.cu.i
+.PHONY : main.cu.i
+
+main.s: main.cu.s
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.cu.s:
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm.dir/build.make gemm/CMakeFiles/gemm.dir/main.cu.s
+.PHONY : main.cu.s
 
 my_gemm_baseline.o: my_gemm_baseline.cu.o
 .PHONY : my_gemm_baseline.o
 
 # target to build an object file
 my_gemm_baseline.cu.o:
-	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/my_gemm_baseline.dir/build.make gemm/CMakeFiles/my_gemm_baseline.dir/my_gemm_baseline.cu.o
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm.dir/build.make gemm/CMakeFiles/gemm.dir/my_gemm_baseline.cu.o
 .PHONY : my_gemm_baseline.cu.o
 
 my_gemm_baseline.i: my_gemm_baseline.cu.i
@@ -143,7 +167,7 @@ my_gemm_baseline.i: my_gemm_baseline.cu.i
 
 # target to preprocess a source file
 my_gemm_baseline.cu.i:
-	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/my_gemm_baseline.dir/build.make gemm/CMakeFiles/my_gemm_baseline.dir/my_gemm_baseline.cu.i
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm.dir/build.make gemm/CMakeFiles/gemm.dir/my_gemm_baseline.cu.i
 .PHONY : my_gemm_baseline.cu.i
 
 my_gemm_baseline.s: my_gemm_baseline.cu.s
@@ -151,7 +175,7 @@ my_gemm_baseline.s: my_gemm_baseline.cu.s
 
 # target to generate assembly for a file
 my_gemm_baseline.cu.s:
-	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/my_gemm_baseline.dir/build.make gemm/CMakeFiles/my_gemm_baseline.dir/my_gemm_baseline.cu.s
+	cd /data/LeetCute && $(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm.dir/build.make gemm/CMakeFiles/gemm.dir/my_gemm_baseline.cu.s
 .PHONY : my_gemm_baseline.cu.s
 
 # Help Target
@@ -162,7 +186,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... my_gemm_baseline"
+	@echo "... gemm"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 	@echo "... my_gemm_baseline.o"
 	@echo "... my_gemm_baseline.i"
 	@echo "... my_gemm_baseline.s"

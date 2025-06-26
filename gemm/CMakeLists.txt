@@ -10,8 +10,8 @@ if(CMAKE_BUILD_TYPE STREQUAL "DEBUG")
 endif()
 
 # 定义多个 CUDA 可执行文件
-add_executable(my_gemm_baseline my_gemm_baseline.cu)
+add_executable(gemm my_gemm_baseline.cu main.cu)
 
 
 # 分别为每个可执行文件链接 CUDA 运行时库
-target_link_libraries(my_gemm_baseline PRIVATE CUDA::cudart)
+target_link_libraries(gemm PRIVATE CUDA::cudart)

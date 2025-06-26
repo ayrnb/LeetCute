@@ -195,17 +195,17 @@ my_reduce_warp_shulf/fast:
 .PHONY : my_reduce_warp_shulf/fast
 
 #=============================================================================
-# Target rules for targets named my_gemm_baseline
+# Target rules for targets named gemm
 
 # Build rule for target.
-my_gemm_baseline: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 my_gemm_baseline
-.PHONY : my_gemm_baseline
+gemm: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gemm
+.PHONY : gemm
 
 # fast build rule for target.
-my_gemm_baseline/fast:
-	$(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/my_gemm_baseline.dir/build.make gemm/CMakeFiles/my_gemm_baseline.dir/build
-.PHONY : my_gemm_baseline/fast
+gemm/fast:
+	$(MAKE) $(MAKESILENT) -f gemm/CMakeFiles/gemm.dir/build.make gemm/CMakeFiles/gemm.dir/build
+.PHONY : gemm/fast
 
 # Help Target
 help:
@@ -215,7 +215,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... my_gemm_baseline"
+	@echo "... gemm"
 	@echo "... my_reduce_baseline"
 	@echo "... my_reduce_no_warp_conflict"
 	@echo "... my_reduce_share_memory"
