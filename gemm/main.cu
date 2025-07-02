@@ -46,6 +46,7 @@ int main(){
     float *C_v2 = (float*)malloc(mem_size_C);
     float *C_v3 = (float*)malloc(mem_size_C);
     float *C_gpu=(float*)malloc(mem_size_C);
+    float *C_gpu_2=(float*)malloc(mem_size_C);
     float *d_A;
     float *d_B;
     float *d_C;
@@ -154,6 +155,16 @@ int main(){
     cudaMemcpy(C_gpu,d_C,mem_size_C,cudaMemcpyDeviceToHost);
 
     bool ok4 = check_result(C_ref, C_gpu, m, n,"gpu",1e-4);
+
+    cudaEventRecord(start,0);
+    gemm_share_v1_gpu<16,16><<<grid,block>>>(d_A,d_B,d_C,m,n,k);
+    cudaEventRecord(end,0);
+    cudaEventSynchronize(end);
+    cudaEventElapsedTime(&gpu_time,start,end);
+    printf("v5 time: %.6f s\n", gpu_time/1000);
+    cudaMemcpy(C_gpu_2,d_C,mem_size_C,cudaMemcpyDeviceToHost);
+    bool ok5 = check_result(C_ref, C_gpu_2, m, n,"gpu_v2",1e-4);
+
     free(A);
     free(B);
     free(C_ref);
