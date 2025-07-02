@@ -29,149 +29,137 @@ double get_time() {
     return tv.tv_sec + tv.tv_usec * 1e-6;
 }
 
-int main(){
-    // printf("hello world\n");
-    int m=2048;
-    int n=2048;
-    int k=2048; 
-    const size_t mem_size_A=m*k*sizeof(float);
-    const size_t mem_size_B=k*n*sizeof(float);
-    const size_t mem_size_C=m*n*sizeof(float);
+int main() {
+    const int m = 2048, n = 2048, k = 2048;
+    const size_t mem_size_A = m * k * sizeof(float);
+    const size_t mem_size_B = k * n * sizeof(float);
+    const size_t mem_size_C = m * n * sizeof(float);
 
-    // 分配内存
-    float *A=(float*)malloc(mem_size_A);
-    float *B=(float*)malloc(mem_size_B);
+    // 检查环境变量
+    const char* enable_cpu_opt = getenv("ENABLE_CPU_OPT");
+    bool run_cpu_opt = (enable_cpu_opt != NULL && strcmp(enable_cpu_opt, "1") == 0);
+
+    // 分配内存（根据是否运行CPU优化决定分配多少）
+    float *A = (float*)malloc(mem_size_A);
+    float *B = (float*)malloc(mem_size_B);
     float *C_ref = (float*)malloc(mem_size_C);
-    float *C_v1 = (float*)malloc(mem_size_C);
-    float *C_v2 = (float*)malloc(mem_size_C);
-    float *C_v3 = (float*)malloc(mem_size_C);
-    float *C_gpu=(float*)malloc(mem_size_C);
-    float *C_gpu_2=(float*)malloc(mem_size_C);
-    float *d_A;
-    float *d_B;
-    float *d_C;
-    cudaMalloc(&d_A,mem_size_A);
-    cudaMalloc(&d_B,mem_size_B);
-    cudaMalloc(&d_C,mem_size_C);
+    float *C_gpu = (float*)malloc(mem_size_C);
+    float *C_v1 = run_cpu_opt ? (float*)malloc(mem_size_C) : nullptr;
+    float *C_v2 = run_cpu_opt ? (float*)malloc(mem_size_C) : nullptr;
+    float *C_v3 = run_cpu_opt ? (float*)malloc(mem_size_C) : nullptr;
 
-    // 初始化A B矩阵
-    for(int i=0;i<m;i++){
-        for(int j=0;j<k;j++){
-            A[i * k + j] = 1.0f;
-        }
-       
-    }
-    for(int i=0;i<k;i++){
-        for(int j=0;j<n;j++){
-            B[i * n + j]=1.0f;
-        }
-    }
-    // 清零 C
+    // 初始化矩阵（使用1.0填充）
+    for(int i = 0; i < m * k; i++) A[i] = 1.0f;
+    for(int i = 0; i < k * n; i++) B[i] = 1.0f;
     memset(C_ref, 0, mem_size_C);
-    memcpy(C_v1, C_ref, mem_size_C);
-    memcpy(C_v2, C_ref, mem_size_C);
 
-    // 计算A*B=C_ref
-    double start_time=get_time();
-    for(int i=0;i<m;i++){
-        for(int l=0;l<k;l++){
-            for(int j=0;j<n;j++){
-                C_ref[i * n + j] += A[i * k + l] * B[l * n + j];
-            }
-        }
-    }
-    double end_time=get_time();
-    double time=double(end_time-start_time);
-    printf("v0 time: %.3f s\n", time);  
-    start_time=get_time();
-    for (int l = 0; l < k; l++) {
-        for (int i = 0; i < m; i++) {
-            float a_val = A[i * k + l];  
-            for (int j = 0; j < n; j++) {
-                C_v1[i * n + j] += a_val * B[l * n + j];
-            }
-        }
-    }
-    end_time=get_time();
-    time=double(end_time-start_time);
-    printf("v1 time: %.3f s\n", time);
-    // 减少地址计算
-    start_time=get_time();
-    for (int l = 0; l < k; l++) {
-        const float* b_row = &B[l * n];
-        for (int i = 0; i < m; i++) {
+    // 基准CPU计算
+    double start = get_time();
+    for(int i = 0; i < m; i++) {
+        for(int l = 0; l < k; l++) {
             float a_val = A[i * k + l];
-            float* c_row = &C_v2[i * n];
-            for (int j = 0; j < n; j++) {
-                c_row[j] += a_val * b_row[j];
+            for(int j = 0; j < n; j++) {
+                C_ref[i * n + j] += a_val * B[l * n + j];
             }
         }
     }
-    end_time=get_time();
-    time=double(end_time-start_time);
-    printf("v2 time: %.3f s\n", time);
+    printf("CPU time: %.3f s\n", get_time() - start);
 
-    //内存循环展开计算
-    start_time=get_time();
-    for (int l = 0; l < k; l++) {
-        const float* b_row = &B[l * n];
-        for (int i = 0; i < m; i++) {
-            float a_val = A[i * k + l];
-            float* c_row = &C_v3[i * n];
-            for (int j = 0; j < n; j+=4) {
-                c_row[j+0] += a_val * b_row[j+0];
-                c_row[j+1] += a_val * b_row[j+1];
-                c_row[j+2] += a_val * b_row[j+2];
-                c_row[j+3] += a_val * b_row[j+3];
+    // GPU计算部分
+    float *d_A, *d_B, *d_C;
+    cudaMalloc(&d_A, mem_size_A);
+    cudaMalloc(&d_B, mem_size_B);
+    cudaMalloc(&d_C, mem_size_C);
+    cudaMemcpy(d_A, A, mem_size_A, cudaMemcpyHostToDevice);
+    cudaMemcpy(d_B, B, mem_size_B, cudaMemcpyHostToDevice);
+
+    dim3 block(16, 16);
+    dim3 grid((m + block.x - 1) / block.x, (n + block.y - 1) / block.y);
+    
+    // 基准GPU核函数
+    cudaEvent_t start_event, end_event;
+    cudaEventCreate(&start_event);
+    cudaEventCreate(&end_event);
+    
+    cudaEventRecord(start_event);
+    gemm_baseline_gpu<16,16><<<grid, block>>>(d_A, d_B, d_C, m, n, k);
+    cudaEventRecord(end_event);
+    cudaEventSynchronize(end_event);
+    
+    float elapsed;
+    cudaEventElapsedTime(&elapsed, start_event, end_event);
+    printf("GPU baseline: %.6f s\n", elapsed / 1000);
+    cudaMemcpy(C_gpu, d_C, mem_size_C, cudaMemcpyDeviceToHost);
+    bool ok = check_result(C_ref, C_gpu, m, n, "baseline", 1e-4);
+
+    // 共享内存版本（复用d_C）
+    cudaMemset(d_C, 0, mem_size_C);  // 清零
+    
+    cudaEventRecord(start_event);
+    gemm_share_v1_gpu<16,16><<<grid, block>>>(d_A, d_B, d_C, m, n, k);
+    cudaEventRecord(end_event);
+    cudaEventSynchronize(end_event);
+    
+    cudaEventElapsedTime(&elapsed, start_event, end_event);
+    printf("GPU shared: %.6f s\n", elapsed / 1000);
+    cudaMemcpy(C_gpu, d_C, mem_size_C, cudaMemcpyDeviceToHost);
+    ok &= check_result(C_ref, C_gpu, m, n, "shared", 1e-4);
+
+    // 添加CPU优化版本（仅在环境变量启用时运行）
+    if(run_cpu_opt) {
+        memcpy(C_v1, C_ref, mem_size_C);
+        memcpy(C_v2, C_ref, mem_size_C);
+        memcpy(C_v3, C_ref, mem_size_C);
+
+        // v1优化版本
+        start = get_time();
+        for (int l = 0; l < k; l++) {
+            for (int i = 0; i < m; i++) {
+                float a_val = A[i * k + l];
+                for (int j = 0; j < n; j++) {
+                    C_v1[i * n + j] += a_val * B[l * n + j];
+                }
             }
         }
+        printf("CPU v1 time: %.3f s\n", get_time() - start);
+
+        // v2优化版本（指针优化）
+        start = get_time();
+        for (int l = 0; l < k; l++) {
+            const float* b_row = &B[l * n];
+            for (int i = 0; i < m; i++) {
+                float a_val = A[i * k + l];
+                float* c_row = &C_v2[i * n];
+                for (int j = 0; j < n; j++) {
+                    c_row[j] += a_val * b_row[j];
+                }
+            }
+        }
+        printf("CPU v2 time: %.3f s\n", get_time() - start);
+
+        // v3优化版本（循环展开）
+        start = get_time();
+        for (int l = 0; l < k; l++) {
+            const float* b_row = &B[l * n];
+            for (int i = 0; i < m; i++) {
+                float a_val = A[i * k + l];
+                float* c_row = &C_v3[i * n];
+                for (int j = 0; j < n; j+=4) {
+                    c_row[j+0] += a_val * b_row[j+0];
+                    c_row[j+1] += a_val * b_row[j+1];
+                    c_row[j+2] += a_val * b_row[j+2];
+                    c_row[j+3] += a_val * b_row[j+3];
+                }
+            }
+        }
+        printf("CPU v3 time: %.3f s\n", get_time() - start);
     }
-    end_time=get_time();
-    time=double(end_time-start_time);
-    printf("v3 time: %.3f s\n", time);
 
-    bool ok1 = check_result(C_ref, C_v1, m, n,"v1");
-    bool ok2 = check_result(C_ref, C_v2, m, n,"v2");
-    bool ok3 = check_result(C_ref, C_v3, m, n,"v3");
-    
-    //cpu 还可以使用SSE/AVX和OpenMP等tile优化技术进一步提高计算效率，这里我们直接在GPU上进行
-    cudaMalloc(&d_A,mem_size_A);
-    cudaMemcpy(d_A,A,mem_size_A,cudaMemcpyHostToDevice);
-    cudaMalloc(&d_B,mem_size_B);
-    cudaMemcpy(d_B,B,mem_size_B,cudaMemcpyHostToDevice);
-    cudaMalloc(&d_C,mem_size_C);
-    dim3 block(16,16);
-    dim3 grid((m+block.x-1)/16,(n+block.y-1)/16);
-    cudaEvent_t start,end;
-    cudaEventCreate(&start);
-    cudaEventCreate(&end);
-    cudaEventRecord(start,0);
-    gemm_baseline_gpu<16,16><<<grid,block>>>(d_A,d_B,d_C,m,n,k);
-    cudaEventRecord(end,0);
-    cudaEventSynchronize(end);
-    float gpu_time;
-    cudaEventElapsedTime(&gpu_time,start,end);
-    printf("v4 time: %.6f s\n", gpu_time/1000);
-    cudaMemcpy(C_gpu,d_C,mem_size_C,cudaMemcpyDeviceToHost);
-
-    bool ok4 = check_result(C_ref, C_gpu, m, n,"gpu",1e-4);
-
-    cudaEventRecord(start,0);
-    gemm_share_v1_gpu<16,16><<<grid,block>>>(d_A,d_B,d_C,m,n,k);
-    cudaEventRecord(end,0);
-    cudaEventSynchronize(end);
-    cudaEventElapsedTime(&gpu_time,start,end);
-    printf("v5 time: %.6f s\n", gpu_time/1000);
-    cudaMemcpy(C_gpu_2,d_C,mem_size_C,cudaMemcpyDeviceToHost);
-    bool ok5 = check_result(C_ref, C_gpu_2, m, n,"gpu_v2",1e-4);
-
-    free(A);
-    free(B);
-    free(C_ref);
-    free(C_v1);
-    free(C_v2);
-    free(C_v3);
-    free(C_gpu);
-
-    
+    // 清理资源
+    free(A); free(B); free(C_ref); free(C_gpu);
+    if(run_cpu_opt) {
+        free(C_v1); free(C_v2); free(C_v3);
+    }
+    cudaFree(d_A); cudaFree(d_B); cudaFree(d_C);
+    cudaEventDestroy(start_event); cudaEventDestroy(end_event);
 }

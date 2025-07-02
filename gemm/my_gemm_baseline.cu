@@ -43,10 +43,10 @@ __global__ void gemm_share_v1_gpu(float *A,float *B,float *C,int m,int n,int k){
         }
         __syncthreads();
         for(int s=0;s<BLOCK_SIZE;s++){
-            sum= B_share[threadIdx.x][s]* B_share[s][threadIdx.y];
+            sum+= A_share[threadIdx.x][s]* B_share[s][threadIdx.y];
         }
     }
-    C[m*tx+threadIdx.y]=sum;
+    C[n*tx+ty]=sum;
 
 }
 
